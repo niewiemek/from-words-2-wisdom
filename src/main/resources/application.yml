@@ -1,0 +1,38 @@
+#Thu Oct 10 21:21:47 UTC 2024
+micronaut:
+  application:
+    name: From words 2 wisdom
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+  server:
+    netty:
+      compression-threshold: -1
+---
+embeddings-store:
+  host: localhost
+  port: 6334
+  collection: 40k_lodz
+#  collection: fluff
+  query:
+    maxResults: 5
+    minScore: 0.8
+
+
+model:
+  embedding:
+    name: mxbai-embed-large
+    baseUrl: http://localhost:11434/
+  chat:
+    llama:
+      name: llama3.2
+      baseUrl: http://localhost:11434/
+    gpt4o:
+      name: openai/gpt-4o
+      baseUrl: ${OPENAI_API_URL}
+      apiKey: ${OPENAI_API_KEY}
