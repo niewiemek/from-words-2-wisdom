@@ -10,9 +10,10 @@ plugins {
 version = "0.1"
 group = "com.iteratec"
 
-val langChain4jVersion = "0.35.0"
+val langChain4jVersion = "1.0.0-beta1"
 val ktorVersion = "2.3.12"
 val kotlinVersion=project.properties.get("kotlinVersion")
+
 repositories {
     mavenCentral()
 }
@@ -54,7 +55,7 @@ application {
     mainClass = "com.iteratec.ApplicationKt"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("19")
+    sourceCompatibility = JavaVersion.toVersion("21")
 }
 
 

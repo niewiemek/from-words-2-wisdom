@@ -17,8 +17,7 @@ micronaut:
 embeddings-store:
   host: localhost
   port: 6334
-  collection: 40k_lodz
-#  collection: fluff
+  collection: boiling-frogs-live
   query:
     maxResults: 5
     minScore: 0.8
@@ -33,6 +32,8 @@ model:
       name: llama3.2
       baseUrl: http://localhost:11434/
     gpt4o:
-      name: openai/gpt-4o
+#      name: openai/gpt-4o
+      name: gcp/claude-3.7-sonnet
+#      name: azure/DeepSeek-R1
       baseUrl: ${OPENAI_API_URL}
       apiKey: ${OPENAI_API_KEY}
