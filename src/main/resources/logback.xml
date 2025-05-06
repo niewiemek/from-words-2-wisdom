@@ -8,6 +8,9 @@
         </encoder>
     </appender>
 
+    <logger name="io.qdrant" level="info">
+        <appender-ref ref="STDOUT" />
+    </logger>
     <logger name="dev.langchain4j" level="debug">
         <appender-ref ref="STDOUT" />
     </logger>

@@ -1,6 +1,7 @@
 package com.iteratec.words2wisdom
 
 import com.iteratec.words2wisdom.configuration.EmbeddingModelConfiguration
+import dev.langchain4j.data.document.Metadata
 import dev.langchain4j.data.embedding.Embedding
 import dev.langchain4j.model.embedding.EmbeddingModel
 import dev.langchain4j.model.ollama.OllamaEmbeddingModel
@@ -18,9 +19,9 @@ class EmbeddingsService @Inject constructor(
         .baseUrl(embeddingModelConfiguration.baseUrl)
         .build()
 
-    fun embed(text: String): Embedding {
+    fun embed(text: String, metadata: Metadata): Embedding {
         val embedding = embeddingModel.embed(text).content()
-        embeddingsStore.add(embedding.vector(), text)
+        embeddingsStore.add(embedding.vector(), text, metadata)
 
         return embedding
     }

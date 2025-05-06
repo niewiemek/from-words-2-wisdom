@@ -17,7 +17,7 @@ micronaut:
 embeddings-store:
   host: localhost
   port: 6334
-  collection: boiling-frogs-live
+  collection: 4dev-warszawa-small
   query:
     maxResults: 5
     minScore: 0.8

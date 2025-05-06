@@ -10,7 +10,8 @@ plugins {
 version = "0.1"
 group = "com.iteratec"
 
-val langChain4jVersion = "1.0.0-beta1"
+val langChain4jVersion = "1.0.0-rc1"
+val docParserVersion = "1.0.0-beta4"
 val ktorVersion = "2.3.12"
 val kotlinVersion=project.properties.get("kotlinVersion")
 
@@ -30,10 +31,10 @@ dependencies {
     implementation("com.aallam.openai:openai-client:3.8.2")
 
     implementation("dev.langchain4j:langchain4j-open-ai:${langChain4jVersion}")
-    implementation("dev.langchain4j:langchain4j-ollama:${langChain4jVersion}")
-    implementation("dev.langchain4j:langchain4j-qdrant:${langChain4jVersion}")
-    implementation("dev.langchain4j:langchain4j-easy-rag:${langChain4jVersion}")
-    implementation("dev.langchain4j:langchain4j-document-parser-apache-pdfbox:${langChain4jVersion}")
+    implementation("dev.langchain4j:langchain4j-ollama:${docParserVersion}")
+    implementation("dev.langchain4j:langchain4j-qdrant:${docParserVersion}")
+//    implementation("dev.langchain4j:langchain4j-easy-rag:${langChain4jVersion}")
+    implementation("dev.langchain4j:langchain4j-document-parser-apache-pdfbox:${docParserVersion}")
     implementation("dev.langchain4j:langchain4j:${langChain4jVersion}")
 
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")

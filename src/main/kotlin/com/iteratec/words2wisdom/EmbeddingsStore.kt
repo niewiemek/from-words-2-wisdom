@@ -19,6 +19,6 @@ class EmbeddingsStore @Inject constructor(
         .collectionName(configuration.collection)
         .build()
 
-    fun add(vector: FloatArray, payload: String): String =
-        store.add(Embedding(vector), TextSegment(payload, Metadata()))
+    fun add(vector: FloatArray, payload: String, metadata: Metadata = Metadata()): String =
+        store.add(Embedding(vector), TextSegment(payload, metadata))
 }

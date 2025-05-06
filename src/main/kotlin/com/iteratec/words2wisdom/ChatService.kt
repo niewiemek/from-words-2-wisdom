@@ -28,17 +28,21 @@ class ChatService @Inject constructor(
         .baseUrl(gpt4oChatModelConf.baseUrl)
         .modelName(gpt4oChatModelConf.name)
         .apiKey(gpt4oChatModelConf.apiKey)
+        .logRequests(true)
+//        .logResponses(true)
         .temperature(0.9) // magic parameter
         .build()
 
     private val ollamaChatModel = OllamaChatModel.builder()
         .baseUrl(llmamaChatModelConf.baseUrl)
         .modelName(llmamaChatModelConf.name)
+        .logRequests(true)
         .temperature(0.3)
         .build()
 
     // just to keep it in one place
-    private val chatModel = openAiChatModel
+//    private val chatModel = openAiChatModel
+    private val chatModel = ollamaChatModel
 
     private val queryTransformer: QueryTransformer = CompressingQueryTransformer(chatModel)
 
@@ -55,9 +59,9 @@ class ChatService @Inject constructor(
         .build()
 
     private val chatService = AiServices.builder(Assistant::class.java)
-        .chatLanguageModel(chatModel)
-        .retrievalAugmentor(retrievalAugmentor)
-//        .contentRetriever(contentRetriever)
+        .chatModel(chatModel)
+        .contentRetriever(contentRetriever)
+//        .retrievalAugmentor(retrievalAugmentor)
         .chatMemory(MessageWindowChatMemory.builder().maxMessages(10).build())
         .build()
 
@@ -66,6 +70,6 @@ class ChatService @Inject constructor(
 
 interface Assistant {
 
-    @SystemMessage("You are a servant in an Imperial library. Refer to my as my Lord. Use medieval styled english. When answering concentrate in a very clear answer to the question basing on the provided input.")
+    @SystemMessage("You are a servant in an Imperial library. Refer to my as my Lord. Use medieval styled english. Be precise on the answer limit it to 100 words.")
     fun chat(question: String): String
 }
