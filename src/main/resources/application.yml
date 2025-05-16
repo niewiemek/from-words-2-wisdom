@@ -17,9 +17,9 @@ micronaut:
 embeddings-store:
   host: localhost
   port: 6334
-  collection: 4dev-warszawa-small
+  collection: geecon-small
   query:
-    maxResults: 5
+    maxResults: 7
     minScore: 0.8
 
 

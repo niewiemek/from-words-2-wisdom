@@ -27,17 +27,15 @@ class ChatService @Inject constructor(
         .apiKey(gpt4oChatModelConf.apiKey)
         .baseUrl(gpt4oChatModelConf.baseUrl)
         .modelName(gpt4oChatModelConf.name)
-        .apiKey(gpt4oChatModelConf.apiKey)
         .logRequests(true)
-//        .logResponses(true)
-        .temperature(0.9) // magic parameter
+        .temperature(0.0) // magic parameter
         .build()
 
     private val ollamaChatModel = OllamaChatModel.builder()
         .baseUrl(llmamaChatModelConf.baseUrl)
         .modelName(llmamaChatModelConf.name)
         .logRequests(true)
-        .temperature(0.3)
+        .temperature(0.0)
         .build()
 
     // just to keep it in one place
@@ -50,7 +48,7 @@ class ChatService @Inject constructor(
         .embeddingStore(embeddingsStore.store)
         .embeddingModel(embeddingsService.embeddingModel)
         .minScore(0.6)
-        .maxResults(7)
+        .maxResults(5)
         .build()
 
     private val retrievalAugmentor: RetrievalAugmentor = DefaultRetrievalAugmentor.builder()
@@ -60,8 +58,8 @@ class ChatService @Inject constructor(
 
     private val chatService = AiServices.builder(Assistant::class.java)
         .chatModel(chatModel)
-        .contentRetriever(contentRetriever)
-//        .retrievalAugmentor(retrievalAugmentor)
+//        .contentRetriever(contentRetriever)
+        .retrievalAugmentor(retrievalAugmentor)
         .chatMemory(MessageWindowChatMemory.builder().maxMessages(10).build())
         .build()
 
