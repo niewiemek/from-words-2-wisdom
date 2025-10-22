@@ -17,12 +17,11 @@ micronaut:
 embeddings-store:
   host: localhost
   port: 6334
-  collection: geecon-small
+  collection: wisdom_small
   query:
     maxResults: 7
     minScore: 0.8
-
-
+---
 model:
   embedding:
     name: mxbai-embed-large
@@ -31,9 +30,7 @@ model:
     llama:
       name: llama3.2
       baseUrl: http://localhost:11434/
-    gpt4o:
-#      name: openai/gpt-4o
-      name: gcp/claude-3.7-sonnet
-#      name: azure/DeepSeek-R1
+    remote:
+      name: gcp/claude-sonnet-4-5
       baseUrl: ${OPENAI_API_URL}
       apiKey: ${OPENAI_API_KEY}

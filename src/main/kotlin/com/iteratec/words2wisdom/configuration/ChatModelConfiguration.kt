@@ -11,5 +11,5 @@ open class ChatModelConfiguration {
 @ConfigurationProperties("model.chat.llama")
 class LlamaChatModelConfig: ChatModelConfiguration()
 
-@ConfigurationProperties("model.chat.gpt4o")
-class Gpt4oChatModelConfig: ChatModelConfiguration()
+@ConfigurationProperties("model.chat.remote")
+class RemoteChatConfig: ChatModelConfiguration()

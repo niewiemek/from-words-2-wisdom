@@ -1,7 +1,8 @@
 package com.iteratec.words2wisdom
 
-import com.iteratec.words2wisdom.configuration.Gpt4oChatModelConfig
+import com.iteratec.words2wisdom.configuration.RemoteChatConfig
 import com.iteratec.words2wisdom.configuration.LlamaChatModelConfig
+import com.iteratec.words2wisdom.guardrails.MathGuardrail
 import dev.langchain4j.memory.chat.MessageWindowChatMemory
 import dev.langchain4j.model.ollama.OllamaChatModel
 import dev.langchain4j.model.openai.OpenAiChatModel
@@ -19,14 +20,14 @@ import jakarta.inject.Singleton
 @Singleton
 class ChatService @Inject constructor(
     private val llmamaChatModelConf: LlamaChatModelConfig,
-    private val gpt4oChatModelConf: Gpt4oChatModelConfig,
+    private val remoteChatModelConf: RemoteChatConfig,
     private val embeddingsService: EmbeddingsService,
     private val embeddingsStore: EmbeddingsStore
 ) {
     private val openAiChatModel = OpenAiChatModel.builder()
-        .apiKey(gpt4oChatModelConf.apiKey)
-        .baseUrl(gpt4oChatModelConf.baseUrl)
-        .modelName(gpt4oChatModelConf.name)
+        .apiKey(remoteChatModelConf.apiKey)
+        .baseUrl(remoteChatModelConf.baseUrl)
+        .modelName(remoteChatModelConf.name)
         .logRequests(true)
         .temperature(0.0) // magic parameter
         .build()
@@ -39,8 +40,8 @@ class ChatService @Inject constructor(
         .build()
 
     // just to keep it in one place
-//    private val chatModel = openAiChatModel
     private val chatModel = ollamaChatModel
+//    private val chatModel = openAiChatModel
 
     private val queryTransformer: QueryTransformer = CompressingQueryTransformer(chatModel)
 
@@ -58,8 +59,8 @@ class ChatService @Inject constructor(
 
     private val chatService = AiServices.builder(Assistant::class.java)
         .chatModel(chatModel)
-//        .contentRetriever(contentRetriever)
         .retrievalAugmentor(retrievalAugmentor)
+        .inputGuardrails(listOf(MathGuardrail()))
         .chatMemory(MessageWindowChatMemory.builder().maxMessages(10).build())
         .build()
 
@@ -68,6 +69,6 @@ class ChatService @Inject constructor(
 
 interface Assistant {
 
-    @SystemMessage("You are a servant in an Imperial library. Refer to my as my Lord. Use medieval styled english. Be precise on the answer limit it to 100 words.")
+//    @SystemMessage("You are a servant in an Imperial library. Refer to my as my Lord. Use medieval styled english. Be precise on the answer limit it to 100 words.")
     fun chat(question: String): String
 }

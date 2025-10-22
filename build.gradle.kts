@@ -10,8 +10,8 @@ plugins {
 version = "0.1"
 group = "com.iteratec"
 
-val langChain4jVersion = "1.0.0"
-val langchain4jVersion_beta5 = "1.0.0-beta5"
+val langChain4jVersion = "1.7.1"
+val langchain4jVersion_beta14 = "1.7.1-beta14"
 val ktorVersion = "2.3.12"
 val kotlinVersion=project.properties.get("kotlinVersion")
 
@@ -28,12 +28,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
 
-    implementation("com.aallam.openai:openai-client:3.8.2")
-
     implementation("dev.langchain4j:langchain4j-open-ai:${langChain4jVersion}")
-    implementation("dev.langchain4j:langchain4j-ollama:${langchain4jVersion_beta5}")
-    implementation("dev.langchain4j:langchain4j-qdrant:${langchain4jVersion_beta5}")
-    implementation("dev.langchain4j:langchain4j-document-parser-apache-pdfbox:${langchain4jVersion_beta5}")
+    implementation("dev.langchain4j:langchain4j-ollama:${langChain4jVersion}")
+    implementation("dev.langchain4j:langchain4j-qdrant:${langchain4jVersion_beta14}")
+    implementation("dev.langchain4j:langchain4j-document-parser-apache-pdfbox:${langchain4jVersion_beta14}")
     implementation("dev.langchain4j:langchain4j:${langChain4jVersion}")
 
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
